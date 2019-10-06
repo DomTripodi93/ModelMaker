@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="row">
+    <div *ngIf="modelForm" class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form (ngSubmit)='onSubmit()' [formGroup]="modelForm">
+        <div class='form-group'>
+          <div class='form-group'>
+            <label for='model'>Model Name</label>
+            <input 
+              id='model' 
+              class='form-control'
+              formControlName="model">       
+          </div>
+          <div class='row'>
+            <div class='col-xs-12' formArrayName='fields'>
+              <label for="fields">Fields:</label>
+              <div 
+                class='row'
+                *ngFor="let fieldCtrl of getControls(); let i = index"
+                [formGroupName] = 'i'>
+                <div class="col-xs-4">
+                  <label for='fieldName'>Field Name:</label>
+                    <input
+                      class='form-control'
+                      formControlName="fieldName">
+                </div>
+                <div class="col-xs-3">
+                  <label for='fieldType'>Field Type:</label>
+                  <select
+                    formControlName='fieldType'
+                    type="text" 
+                    id="fieldType" 
+                    class="form-control">
+                    <option *ngFor = "let type of fieldTypes">{{type}}</option>
+                  </select>    
+                </div>
+                <div class="col-xs-3">
+                  <label for='foreignKey'>Foreign Key:</label>
+                  <select
+                    formControlName='foreignKey'
+                    type="text" 
+                    id="foreignKey" 
+                    class="form-control">
+                    <option>true</option>
+                    <option>false</option>
+                  </select>    
+                </div>
+                <div class="col-xs-2">
+                  <label>Remove</label>
+                    <button 
+                      type='button' 
+                      class='btn btn-danger'
+                      (click)='calc.onRemoveBar(i)'>
+                    --X--
+                    </button><br><br>
+                </div>       
+                </div>
+                <hr>
+                <button type='button' class='btn btn-primary' (click)="newField()">Add Another Field</button>
+              </div>
+          </div>
+        <button 
+          class="btn btn-primary" 
+          type="submit"
+          [disabled]="!modelForm.valid"
+          >Make Model</button>
+    </div>

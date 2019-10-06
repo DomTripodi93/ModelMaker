@@ -1,0 +1,20 @@
+<br><br>
+<form (ngSubmit)='changeBackend()' #changeBackend="ngForm">
+  <div class="grid2 col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+    <label for='backend'>Backend:</label>
+    <select
+      name = "backend"
+      type = "text" 
+      [(ngModel)] = "backend"
+      id = "backend" 
+      class = "form-control">
+      <option *ngFor = "let framework of backends">{{framework}}</option>
+    </select>    
+    <div></div>
+    <button class="btn btn-primary"><strong>Change Backend</strong></button>
+  </div>
+</form>  
+<br><br><br><br><br>
+<pre class="code">
+  Test
+</pre>
