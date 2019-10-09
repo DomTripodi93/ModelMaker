@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ModelService } from '../model.service';
 
 @Component({
   selector: 'app-input',
@@ -15,7 +17,11 @@ export class InputComponent implements OnInit {
     "DateTime"
   ]
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private modelServ: ModelService
+  ) { }
 
   ngOnInit() {
     this.initForm();
@@ -41,7 +47,7 @@ export class InputComponent implements OnInit {
       (<FormArray>this.modelForm.get('fields')).push(
           new FormGroup({
             'fieldName': new FormControl(null, Validators.required),
-            'fieldType': new FormControl("string", Validators.required),
+            'fieldType': new FormControl("String", Validators.required),
             'foreignKey': new FormControl(false, Validators.required),
           })
       )
@@ -53,6 +59,11 @@ export class InputComponent implements OnInit {
 
   onSubmit(){
     console.log(this.modelForm.value)
+    this.modelServ.fields = this.modelForm.value.fields;
+    this.modelServ.modelName = this.modelForm.value.model.charAt(0).toUpperCase() + this.modelForm.value.model.substring(1);
+    setTimeout(()=>{
+      this.router.navigate(["output"], {relativeTo: this.route});
+    },10)
   }
 
 }

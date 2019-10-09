@@ -9,8 +9,12 @@ import { NgForm } from '@angular/forms';
 })
 export class OutputComponent implements OnInit {
   @ViewChild('changeBackend') changeBackendForm: NgForm;
-  backends = ["Django", "C# .NET Core"]
-  backend = ""
+  backends = ["Django", "C# .NET Core"];
+  backend = "C# .NET Core";
+  dateTimeFields = false;
+  stringFields = [];
+  boolFields = [];
+  numFields = [];
 
 
   constructor(
@@ -18,10 +22,15 @@ export class OutputComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.modelServ.fields.forEach((field)=>{
+      if (field.fieldType == "DateTime"){
+        this.dateTimeFields = true;
+      }
+    })
   }
 
   changeBackend(){
-    
+
   }
 
 }

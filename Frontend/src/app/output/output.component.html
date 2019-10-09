@@ -16,5 +16,15 @@
 </form>  
 <br><br><br><br><br>
 <pre class="code">
-  Test
+<div *ngIf="dateTimeFields">using System;</div>
+namespace {{"<"}}YourAppName>.{{"<"}}YourModelFolder>
+{{"{"}}
+    public class {{modelServ.modelName}}
+    {{"{"}}<div *ngFor="let field of modelServ.fields"><div *ngIf="field.fieldType == 'String'">
+        public string {{field.fieldName}} {{"{"}} get; set; }</div><div *ngIf="field.fieldType == 'Integer'">
+        public int {{field.fieldName}} {{"{"}} get; set; }</div><div *ngIf="field.fieldType == 'Boolean'">
+        public bool {{field.fieldName}} {{"{"}} get; set; }</div><div *ngIf="field.fieldType == 'DateTime'">
+        public DateTime {{field.fieldName}} {{"{"}} get; set; }</div></div>
+    }
+}
 </pre>
